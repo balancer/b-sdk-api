@@ -78,8 +78,11 @@ export class JoinData {
   constructor(private readonly subgraphClient: SubgraphClient) {}
 
   async fetchPoolState(id: string): Promise<PoolState> {
-    return await this.subgraphClient.fetch('GetPool', this.poolStateQuery, {
+    const {
+      data: { poolGetPool },
+    } = await this.subgraphClient.fetch('GetPool', this.poolStateQuery, {
       id,
     });
+    return poolGetPool;
   }
 }
